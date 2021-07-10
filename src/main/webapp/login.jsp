@@ -3,7 +3,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>系统登录123 - 超市销售管理系统</title>
+    <title>系统登录 - 超市销售管理系统</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 </head>
