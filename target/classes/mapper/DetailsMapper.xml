@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whut.dao.DetailsDao">
+    <!--  查询所有账单信息  -->
+    <select id="findDetailsByBillId" parameterType="java.lang.Integer" resultType="details">
+        select * from details where bill_id=#{bill_id}
+    </select>
+    <!--  根据id删除details记录  -->
+    <delete id="delDetailsById" parameterType="java.lang.Integer">
+        delete from details where id=#{id}
+    </delete>
+    <!--  添加账单详情  -->
+    <insert id="addDetails" parameterType="details">
+        insert into details(quantity, bill_id, goods_id)
+        values(#{quantity},#{bill_id},#{goods_id})
+    </insert>
+</mapper>

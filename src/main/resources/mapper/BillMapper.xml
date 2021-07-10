@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whut.dao.BillDao">
+    <!--  查询所有账单信息  -->
+    <select id="findAll" resultType="bill">
+        select * from bill where 1=1
+        <if test="code != null and code != '' ">
+            and code like concat("%",#{code},"%")
+        </if>
+        <if test="user_id != null and user_id != '' and user_id != 0">
+            and user_id=#{user_id}
+        </if>
+    </select>
+    <!--  根据id查询账单  -->
+    <select id="getBillById" parameterType="java.lang.Integer" resultType="bill">
+        select * from bill where id=#{id}
+    </select>
+    <!--  根据id删除账单  -->
+    <delete id="delBillById" parameterType="java.lang.Integer">
+        delete from bill where id=#{id}
+    </delete>
+    <!--  更改账单的外键user_id  -->
+    <update id="updateBillsByUserId" parameterType="java.lang.Integer">
+        update bill set user_id=1 where user_id=#{id}
+    </update>
+    <!--  添加账单  -->
+    <insert id="addBill" parameterType="bill" useGeneratedKeys="true" keyProperty="id">
+        insert into bill(createTime, totalPrice, code, user_id)
+        values(#{createTime},#{totalPrice},#{code},#{user_id})
+    </insert>
+</mapper>

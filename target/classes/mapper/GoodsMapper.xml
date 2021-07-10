@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whut.dao.GoodsDao">
+    <!--  查询所有商品信息  -->
+    <select id="findAll" resultType="goods">
+        select * from goods where 1=1
+        <if test="name != null and name != '' ">
+            and name like concat("%",#{name},"%")
+        </if>
+        <if test="type != null and type != '' and type != 0 ">
+            and type=#{type}
+        </if>
+    </select>
+    <!--  根据id查询商品  -->
+    <select id="getGoodsById" parameterType="java.lang.Integer" resultType="goods">
+        select * from goods where id=#{id}
+    </select>
+    <!--  根据名称查询商品  -->
+    <select id="getGoodsByName" parameterType="java.lang.String" resultType="goods">
+        select * from goods where name=#{name}
+    </select>
+    <!--  添加商品  -->
+    <insert id="addGoods" parameterType="goods" useGeneratedKeys="true" keyProperty="id">
+        insert into goods(name, purchasePrice, price, `desc`, quantity, type)
+        values(#{name},#{purchasePrice},#{price},#{desc},#{quantity},#{type})
+    </insert>
+    <!--  修改商品信息  -->
+    <update id="updateGoods" parameterType="goods">
+        update goods set name=#{name},purchasePrice=#{purchasePrice},price=#{price},`desc`=#{desc},quantity=#{quantity},
+        type=#{type} where id=#{id}
+    </update>
+</mapper>
